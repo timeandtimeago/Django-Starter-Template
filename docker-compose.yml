@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.postgress.env
+    networks:
+      - gateway
+
+  web:
+    build:
+      context: ./
+    entrypoint: /app/entrypoint.dev.sh
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: gunicorn --worker-class gthread --workers 2 --threads 4 --log-level debug axon_django.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./app:/app
+      # - ./dev_files:/home/app/dev_files/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env
+    networks:
+      - gateway
+
+volumes:
+  local_postgres_data:
+
+networks:
+  gateway:
+    name: local_dev_infra_gateway
+    driver: bridge
