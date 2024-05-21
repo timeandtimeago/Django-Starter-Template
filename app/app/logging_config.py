@@ -80,7 +80,7 @@ LOGGING = {
     },
     "root": {
         "level": "INFO",
-        "handlers": ["console" if not is_local_dev else "rich"],
+        "handlers": ["console" if AppConfig.USE_STRUCTURED_LOGS else "rich"],
     },
 }
 

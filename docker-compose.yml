@@ -12,21 +12,20 @@ services:
     networks:
       - gateway
 
-  # web:
-  #   build:
-  #     context: ./
-  #   entrypoint: /app/entrypoint.dev.sh
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   # command: gunicorn --worker-class gthread --workers 2 --threads 4 --log-level debug axon_django.wsgi:application --bind 0.0.0.0:8000
-  #   volumes:
-  #     - ./app:/app
-  #     # - ./dev_files:/home/app/dev_files/
-  #   ports:
-  #     - 8000:8000
-  #   env_file:
-  #     - ./.env
-  #   networks:
-  #     - gateway
+  web:
+    build:
+      context: ./
+    entrypoint: /app/entrypoint.dev.sh
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: gunicorn --worker-class gthread --workers 2 --threads 4 --log-level debug axon_django.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./app:/app
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env-local-django.env.example
+    networks:
+      - gateway
 
 volumes:
   local_postgres_data:

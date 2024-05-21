@@ -8,11 +8,13 @@ class AppConfig:
     CORS_ALLOWED_ORIGINS = []
     PG_USER = 'django'
     PG_PASSWORD = 'db_password'
-    PG_HOST = 'localhost'
+    PG_HOST = 'db'
     PG_PORT = '5432'
     PG_DB = 'postgres'
 
     # Static assets config values
     USE_GCS_STATIC_ASSETS = False
     GCS_STATIC_ASSETS_BUCKET = ''
+
+    USE_STRUCTURED_LOGS = False
     
