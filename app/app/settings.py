@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     # 'django.contrib.staticfiles', # appended further down in settings based on env config logic
     'corsheaders',
+    'BaseUser',
 ]
 
 MIDDLEWARE = [
@@ -87,9 +88,12 @@ TEMPLATES = [
     },
 ]
 
+
+CSRF_TRUSTED_ORIGINS = AppConfig.CORS_ALLOWED_ORIGINS
 CORS_ALLOW_ALL_ORIGINS = AppConfig.LOCAL_DEV == True
-CORS_ALLOWED_ORIGINS = AppConfig.CORS_ALLOWED_ORIGINS
 WSGI_APPLICATION = 'app.wsgi.application'
+
+AUTH_USER_MODEL='BaseUser.BaseUser'
 
 
 # Database
